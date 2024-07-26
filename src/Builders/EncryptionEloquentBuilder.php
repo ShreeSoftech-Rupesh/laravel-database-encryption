@@ -43,4 +43,21 @@ class EncryptionEloquentBuilder extends Builder
 
         return $query;
     }
+
+
+    public function whereEncryptedAny(array $fields, $operation, $value)
+    {
+        $query = $this;
+
+        foreach ($fields as $index => $field) {
+            $salt = substr(hash('sha256', config('laravelDatabaseEncryption.encrypt_key')), 0, 16);
+            if ($index == 0) {
+                $query = $query->whereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(`{$field}`), '{$salt}') USING utf8mb4) {$operation} ?", [$value]);
+            } else {
+                $query = $query->orWhereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(`{$field}`), '{$salt}') USING utf8mb4) {$operation} ?", [$value]);
+            }
+        }
+
+        return $query;
+    }
 }
