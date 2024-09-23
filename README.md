@@ -37,7 +37,7 @@ We highly recommend to alter your column types to `TEXT` or `LONGTEXT`
 Via Composer command line:
 
 ```bash
-$ composer require elgibor-solution/laravel-database-encryption
+$ composer require ShreeSoftech-Rupesh/laravel-database-encryption
 ```
 
 ### Step 2: Add ServiceProvider to your app/config.php file (Laravel 5.4 or below)
