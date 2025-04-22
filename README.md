@@ -1,11 +1,5 @@
 # Laravel Database Encryption Package
 
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ShreeSoftech-Rupesh/laravel-database-encryption.svg?style=flat-square)](https://packagist.org/packages/ShreeSoftech-Rupesh/laravel-database-encryption) 
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md) 
-[![Build Status](https://travis-ci.com/ShreeSoftech-Rupesh/laravel-database-encryption.svg?branch=main)](https://travis-ci.com/ShreeSoftech-Rupesh/laravel-database-encryption) 
-[![Total Downloads](https://img.shields.io/packagist/dt/ShreeSoftech-Rupesh/laravel-database-encryption.svg?style=flat-square)](https://packagist.org/packages/ShreeSoftech-Rupesh/laravel-database-encryption)
-
 This package was cloned from [here](https://github.com/elgiborsolution/laravel-database-encryption) due to the original owner's inactivity.
 
 ## Package for encrypting and decrypting model attributes for Laravel using openssl
