@@ -1,11 +1,11 @@
 {
-  "name": "ShreeSoftech-Rupesh/laravel-database-encryption",
+  "name": "shreesoftech-rupesh/laravel-database-encryption",
   "description": "Auto Encrypt and Decrypt Database through Eloquent",
   "type": "library",
   "license": "MIT",
   "authors": [
     {
-      "name": "Rupesh",
+      "name": "rupesh",
       "email": "rupesh@shreesoftech.com"
     }
   ],
