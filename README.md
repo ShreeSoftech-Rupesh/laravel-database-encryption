@@ -14,7 +14,7 @@
 * Encrypt, Decrypt database fields easily
 * Minimal configuration
 * Include searching encrypted data using the following:
-    `whereEncrypted` and `orWhereEncrypted`
+    `whereEncrypted` and `orWhereEncrypted` and `whereEncryptedAll` and `whereEncryptedAny`
 * uses openssl for encrypting and decrypting fields
 
 ## Requirements
