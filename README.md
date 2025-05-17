@@ -94,10 +94,10 @@ similar to laravel eloquent `where` and `orWhere`.
 
 ### Encrypt your current data
  If you have current data in your database you can encrypt it with the: 
-    `php artisan encryptable:encryptModel 'App\User'` command.
+    `php artisan encryptable:encryptModel 'App\Models\User'` command.
     
  Additionally you can decrypt it using the:
-    `php artisan encryptable:decryptModel 'App\User'` command.
+    `php artisan encryptable:decryptModel 'App\Models\User'` command.
 
  Note: You must implement first the `Encryptable` trait and set `$encryptable` attributes
 
