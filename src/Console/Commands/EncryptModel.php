@@ -1,9 +1,11 @@
 <?php
+
 /**
  * src/Commands/EncryptModel.php.
  *
  */
-namespace ESolution\DBEncryption\Console\Commands;
+
+namespace ShreeSoftech\DBEncryption\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
@@ -46,13 +48,13 @@ class EncryptModel extends Command
         $total = $this->model->where('encrypted', 0)->count();
         $this->model::$enableEncryption = false;
 
-        if($total > 0){
-            $this->comment($total.' records will be encrypted');
+        if ($total > 0) {
+            $this->comment($total . ' records will be encrypted');
             $bar = $this->output->createProgressBar($total);
             $bar->setFormat('%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
 
             $records =  $this->model->orderBy($pk_id, 'asc')->where('encrypted', 0)
-                ->chunkById(100, function($records) use($table, $bar, $pk_id) {
+                ->chunkById(100, function ($records) use ($table, $bar, $pk_id) {
                     foreach ($records as $record) {
                         $record->timestamps = false;
                         $attributes = $this->getEncryptedAttributes($record);
@@ -63,7 +65,7 @@ class EncryptModel extends Command
                         $record = null;
                         $attributes = null;
                     }
-            });
+                });
 
             $bar->finish();
         }
@@ -78,7 +80,7 @@ class EncryptModel extends Command
         foreach ($this->attributes as $attribute) {
             $raw = $record->getOriginal($attribute);
             // if (!str_contains($raw, $record->encrypter()->getPrefix())) {
-                $encryptedFields[$attribute] = $this->model->encryptAttribute($raw);
+            $encryptedFields[$attribute] = $this->model->encryptAttribute($raw);
             // }
         }
         return $encryptedFields;

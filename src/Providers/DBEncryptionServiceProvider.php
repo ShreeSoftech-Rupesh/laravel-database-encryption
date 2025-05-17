@@ -1,16 +1,18 @@
 <?php
+
 /**
  * src/Providers/EncryptServiceProvider.php.
  *
  */
-namespace ESolution\DBEncryption\Providers;
+
+namespace ShreeSoftech\DBEncryption\Providers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
-use ESolution\DBEncryption\Console\Commands\EncryptModel;
-use ESolution\DBEncryption\Console\Commands\DecryptModel;
+use ShreeSoftech\DBEncryption\Console\Commands\EncryptModel;
+use ShreeSoftech\DBEncryption\Console\Commands\DecryptModel;
 
 class DBEncryptionServiceProvider extends ServiceProvider
 {
@@ -30,7 +32,7 @@ class DBEncryptionServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
 
             $this->publishes([
-                __DIR__.'/../Config/config.php' => config_path('laravelDatabaseEncryption.php'),
+                __DIR__ . '/../Config/config.php' => config_path('laravelDatabaseEncryption.php'),
             ], 'config');
 
             $this->commands([
@@ -47,7 +49,7 @@ class DBEncryptionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../Config/config.php', 'laravelDatabaseEncryption');
+        $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'laravelDatabaseEncryption');
     }
 
 
@@ -65,13 +67,13 @@ class DBEncryptionServiceProvider extends ServiceProvider
 
             // Check using normal checker
             $data = DB::table($parameters[0])->whereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(`{$parameters[1]}`), '{$salt}') USING utf8mb4) = '{$value}' ");
-            $data = $ignore_id != '' ? $data->where('id','!=',$ignore_id) : $data;
+            $data = $ignore_id != '' ? $data->where('id', '!=', $ignore_id) : $data;
 
             if ($withFilter) {
                 $data->where($parameters[3], $parameters[4]);
             }
 
-            if($data->first()){
+            if ($data->first()) {
                 return false;
             }
 
@@ -84,15 +86,15 @@ class DBEncryptionServiceProvider extends ServiceProvider
             $salt = substr(hash('sha256', config('laravelDatabaseEncryption.encrypt_key')), 0, 16);
 
             $withFilter = count($parameters) > 3 ? true : false;
-            if(!$withFilter){
+            if (!$withFilter) {
                 $ignore_id = isset($parameters[2]) ? $parameters[2] : '';
-            }else{
+            } else {
                 $ignore_id = isset($parameters[4]) ? $parameters[4] : '';
             }
 
             // Check using normal checker
             $data = DB::table($parameters[0])->whereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(`{$parameters[1]}`), '{$salt}') USING utf8mb4) = '{$value}' ");
-            $data = $ignore_id != '' ? $data->where('id','!=',$ignore_id) : $data;
+            $data = $ignore_id != '' ? $data->where('id', '!=', $ignore_id) : $data;
 
             if ($withFilter) {
                 $data->where($parameters[2], $parameters[3]);

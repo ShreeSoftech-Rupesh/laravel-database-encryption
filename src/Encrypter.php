@@ -1,9 +1,11 @@
 <?php
+
 /**
  * src/Encryption.php.
  *
  */
-namespace ESolution\DBEncryption;
+
+namespace ShreeSoftech\DBEncryption;
 
 class Encrypter
 {

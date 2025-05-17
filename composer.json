@@ -12,13 +12,13 @@
   "require": {},
   "autoload": {
     "psr-4": {
-      "ESolution\\DBEncryption\\": "src"
+      "ShreeSoftech\\DBEncryption\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-        "ESolution\\DBEncryption\\Tests\\": "tests",
-        "ESolution\\DBEncryption\\Tests\\Database\\Factories\\": "tests/database/factories"
+      "ShreeSoftech\\DBEncryption\\Tests\\": "tests",
+      "ShreeSoftech\\DBEncryption\\Tests\\Database\\Factories\\": "tests/database/factories"
     }
   },
   "require-dev": {
@@ -27,9 +27,9 @@
   },
   "extra": {
     "laravel": {
-        "providers": [
-            "ESolution\\DBEncryption\\Providers\\DBEncryptionServiceProvider"
-        ]
+      "providers": [
+        "ShreeSoftech\\DBEncryption\\Providers\\DBEncryptionServiceProvider"
+      ]
     }
   },
   "scripts": {

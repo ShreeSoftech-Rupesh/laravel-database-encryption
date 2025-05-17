@@ -1,9 +1,11 @@
 <?php
+
 /**
  * src/Commands/DecryptModel.php.
  *
  */
-namespace ESolution\DBEncryption\Console\Commands;
+
+namespace ShreeSoftech\DBEncryption\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
@@ -46,26 +48,25 @@ class DecryptModel extends Command
         $total = $this->model->where('encrypted', 1)->count();
         $this->model::$enableEncryption = false;
 
-        if($total > 0){
-            $this->comment($total.' records will be decrypted');
+        if ($total > 0) {
+            $this->comment($total . ' records will be decrypted');
             $bar = $this->output->createProgressBar($total);
             $bar->setFormat('%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%');
 
             $records =  $this->model->orderBy($pk_id, 'asc')->where('encrypted', 1)
-            ->chunkById(100, function($records) use($table, $bar, $pk_id) {
-                foreach ($records as $record) {
-                    $record->timestamps = false;
-                    $attributes = $this->getDecryptedAttributes($record);
-                    $update_id =  "{$record->{$pk_id}}";
-                    DB::table($table)->where($pk_id, $update_id)->update($attributes);
-                    $bar->advance();
-                    $record = null;
-                    $attributes = null;
-                }
-            });
-            
-            $bar->finish();
+                ->chunkById(100, function ($records) use ($table, $bar, $pk_id) {
+                    foreach ($records as $record) {
+                        $record->timestamps = false;
+                        $attributes = $this->getDecryptedAttributes($record);
+                        $update_id =  "{$record->{$pk_id}}";
+                        DB::table($table)->where($pk_id, $update_id)->update($attributes);
+                        $bar->advance();
+                        $record = null;
+                        $attributes = null;
+                    }
+                });
 
+            $bar->finish();
         }
 
         $this->comment('Finished Model Decryption');
@@ -73,14 +74,14 @@ class DecryptModel extends Command
 
     private function getDecryptedAttributes($record)
     {
-        $encryptedFields = ['encrypted' => 0 ];
+        $encryptedFields = ['encrypted' => 0];
 
         foreach ($this->attributes as $attribute) {
             $raw = $record->{$attribute};
 
             // if (str_contains($raw, $record->encrypter()->getPrefix())) {
 
-                $encryptedFields[$attribute] = $this->model->decryptAttribute($raw);
+            $encryptedFields[$attribute] = $this->model->decryptAttribute($raw);
             // }
         }
         return $encryptedFields;

@@ -1,6 +1,6 @@
 <?php
 
-namespace ESolution\DBEncryption\Tests;
+namespace ShreeSoftech\DBEncryption\Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use ESolution\DBEncryption\Traits\EncryptedAttribute;
