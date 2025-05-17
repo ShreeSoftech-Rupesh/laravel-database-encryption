@@ -40,7 +40,7 @@ Add the service provider to the providers array in the config/app.php config fil
 ```php
     'providers' => [
         ...
-        \ESolution\DBEncryption\Providers\DBEncryptionServiceProvider::class,
+        \ShreeSoftech\DBEncryption\Providers\DBEncryptionServiceProvider::class,
     ],
 ```
 
@@ -53,7 +53,7 @@ For example:
 
 ```php
     
-    use ESolution\DBEncryption\Traits\EncryptedAttribute;
+    use ShreeSoftech\DBEncryption\Traits\EncryptedAttribute;
 
     class User extends Eloquent {
         use EncryptedAttribute;
