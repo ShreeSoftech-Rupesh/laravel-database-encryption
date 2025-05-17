@@ -63,4 +63,20 @@ class EncryptionEloquentBuilder extends Builder
 
         return $query;
     }
+
+     /**
+     * Order by an encrypted field
+     * 
+     * @param string $field The encrypted field to order by
+     * @param string $direction The direction to order by (asc or desc)
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function orderByEncrypted($field, $direction = 'asc')
+    {
+        $salt = $this->getEncryptionSalt();
+
+        return self::orderByRaw(
+            "CONVERT(AES_DECRYPT(FROM_BASE64(`{$field}`), '{$salt}') USING utf8mb4) {$direction}"
+        );
+    }
 }
